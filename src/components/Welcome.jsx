@@ -141,8 +141,8 @@ const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials
             <p className="get-in-touch-text">You’ll find your next project, from anywhere. <span>Try us!</span></p>
             <div className="social-icons">
                <a href="#" className="social-icon"><i className="fa-brands fa-facebook-f"></i></a>
-               <a href="#" className="social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
-               <a href="#" className="social-icon"><i className="fa-brands fa-instagram"></i></a>
+               <a href="https://www.linkedin.com/company/kallisto-innovations-pvt-ltd/" className="social-icon"><i className="fa-brands fa-linkedin-in"></i></a>
+               <a href="https://www.instagram.com/kallistoinnovations?igsh=MXQzemJrNGYycjg4Ng==" className="social-icon"><i className="fa-brands fa-instagram"></i></a>
             </div>
           </div>
         </div>
