@@ -1,0 +1,297 @@
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray-text: #666666;
+    --gray-light: #999999;
+    --font-main: 'Inter', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+.main-logo {
+    height: 24px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn-text {
+    background: none;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-black {
+    background: #000;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+/* SECTION */
+.project-section {
+    padding: 60px 5% 100px 5%;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.project-content {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #555;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.project-title {
+    font-family: var(--font-heading);
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.project-description {
+    font-size: 20px;
+    color: #444;
+    margin-bottom: 60px;
+}
+
+/* THANK YOU IMAGE SPACE - Full Bleed */
+.thank-you-image-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.thank-you-image {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.project-cta-area {
+    margin-top: 40px;
+}
+
+.contact-notice {
+    font-family: var(--font-main);
+    font-size: 32px;
+    font-weight: 400;
+    color: #222;
+    margin-bottom: 40px;
+}
+
+.back-btn {
+    background: #000;
+    color: #fff;
+    padding: 16px 60px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.back-btn:hover {
+    transform: scale(1.02);
+}
+
+/* FOOTER */
+.footer {
+    padding: 80px 5% 40px 5%;
+    border-top: 1px solid #f0f0f0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.footer-col h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+    color: #777;
+    font-size: 15px;
+}
+
+.get-in-touch-text {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 300px;
+}
+
+.get-in-touch-text span {
+    font-weight: 700;
+    color: #555;
+}
+
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 35px;
+    height: 35px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: #888;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+.footer-logo-img {
+    height: 22px;
+}
+
+.copyright {
+    color: #bbb;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .project-title {
+        font-size: 52px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .project-section {
+        padding: 60px 5% 40px 5%;
+    }
+
+    .project-title {
+        font-size: 42px;
+    }
+
+    .contact-notice {
+        font-size: 24px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .back-btn {
+        width: 100%;
+    }
+
+    .thank-you-image-container {
+        width: 100%;
+        left: auto;
+        right: auto;
+        margin: 20px 0;
+    }
+
+    .thank-you-image {
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-title {
+        font-size: 34px;
+    }
+
+    .project-description {
+        font-size: 16px;
+    }
+
+    .contact-notice {
+        font-size: 20px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+}
