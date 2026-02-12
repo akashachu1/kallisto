@@ -36,6 +36,8 @@ body {
     display: flex;
     list-style: none;
     gap: 30px;
+    flex: 1;
+    justify-content: center;
 }
 
 .nav-links a {
@@ -135,7 +137,8 @@ body {
     flex: 1;
 }
 
-.exp-row input {
+.exp-row input,
+.exp-row select {
     width: 250px;
     padding: 14px 20px;
     border: 1.5px solid var(--border-color);

@@ -5,7 +5,7 @@ import hero from "../assets/first.png";
 import ball from "../assets/second.png";
 import shadow from "../assets/third.png";
 
-const Home = ({ onBeta, onMaterials }) => {
+const Home = ({ onBeta, onMaterials, onJoinBeta }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -32,15 +32,11 @@ const Home = ({ onBeta, onMaterials }) => {
           <li><a href="#career" onClick={() => setIsMenuOpen(false)}>Career</a></li>
           <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
         </ul>
-        <div className="nav-buttons">
-          <button className="btn-text">Sign up</button>
-          <button className="btn-black">Register</button>
-        </div>
       </nav>
 
       {/* HERO SECTION */}
       <section className="hero-section">
-        <div className="watermark">Kallisto</div>
+        <div className="watermark">K▲llisto</div>
 
         <div className="hero-content">
           <div className="hero-text-area">
@@ -53,7 +49,7 @@ const Home = ({ onBeta, onMaterials }) => {
               A limited onboarding program for selected construction service providers 
               to test a new way of getting consistent, quality projects without marketing spend.
             </p>
-            <button className="cta-btn" onClick={onBeta}>Apply for Beta Access</button>
+            <button className="cta-btn" onClick={onJoinBeta}>Apply for Beta Access</button>
           </div>
 
           <div className="hero-image-area">
@@ -72,7 +68,7 @@ const Home = ({ onBeta, onMaterials }) => {
           <div className="onboarding-text">
             <h2>Onboarding is intentionally limited and based on review and verification.</h2>
             <p>This is not mass enrolment. It’s early partnership before scale.</p>
-            <button className="cta-btn" onClick={onBeta}>Join Beta Testing</button>
+            <button className="cta-btn" onClick={onJoinBeta}>Join Beta Testing</button>
           </div>
         </div>
       </section>

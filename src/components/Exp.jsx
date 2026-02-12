@@ -3,12 +3,56 @@ import './Exp.css';
 import logo from "../assets/LOGO.png";
 
 const Exp = ({ onNext, onHome, formData, updateFormData }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [errors, setErrors] = useState({
+    projectsCompleted: '',
+    manageAtTime: '',
+    projectScale: '',
+    averageDuration: '',
+    teamStructure: ''
+  });
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleChange = (e, field) => {
-    updateFormData({ [field]: e.target.value });
+    const value = e.target.value;
+    
+    if (field === 'projectsCompleted' || field === 'manageAtTime') {
+      if (value !== '' && !/^\d*$/.test(value)) {
+        setErrors(prev => ({ ...prev, [field]: 'Please enter only numbers' }));
+        return;
+      }
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    } else if (value.trim() !== '') {
+      setErrors(prev => ({ ...prev, [field]: '' }));
+    }
+    
+    updateFormData({ [field]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const newErrors = {};
+    if (!formData.projectsCompleted || !formData.projectsCompleted.toString().trim()) {
+      newErrors.projectsCompleted = 'Required';
+    }
+    if (!formData.manageAtTime || !formData.manageAtTime.toString().trim()) {
+      newErrors.manageAtTime = 'Required';
+    }
+    if (!formData.projectScale) newErrors.projectScale = 'Please select project scale';
+    if (!formData.averageDuration) newErrors.averageDuration = 'Please select project duration';
+    if (!formData.teamStructure) newErrors.teamStructure = 'Please select team structure';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(prev => ({ ...prev, ...newErrors }));
+      return;
+    }
+
+    if (errors.projectsCompleted || errors.manageAtTime) return;
+    
     console.log('Expression Data saved (API ready):', formData);
     if (onNext) onNext();
   };
@@ -20,23 +64,24 @@ const Exp = ({ onNext, onHome, formData, updateFormData }) => {
         <div className="logo" onClick={onHome} style={{ cursor: 'pointer' }}>
           <img src={logo} alt="Kallisto" className="main-logo" />
         </div>
-        <ul className="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#beta">Beta</a></li>
-          <li><a href="#materials">Materials</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div className="nav-buttons">
-          <button className="btn-text">Sign up</button>
-          <button className="btn-black">Register</button>
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </div>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a></li>
+          <li><a href="#beta" onClick={() => setIsMenuOpen(false)}>Beta</a></li>
+          <li><a href="#materials" onClick={() => setIsMenuOpen(false)}>Materials</a></li>
+          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
+          <li><a href="#career" onClick={() => setIsMenuOpen(false)}>Career</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
+        </ul>
       </nav>
 
       {/* FORM SECTION */}
       <section className="exp-section">
-        <div className="watermark">Kallisto</div>
+        <div className="watermark">K▲llisto</div>
 
         <div className="exp-content">
           <div className="exp-header">
@@ -57,6 +102,7 @@ const Exp = ({ onNext, onHome, formData, updateFormData }) => {
                 onChange={(e) => handleChange(e, 'projectsCompleted')}
                 required
               />
+              {errors.projectsCompleted && <span className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.projectsCompleted}</span>}
             </div>
 
             <div className="exp-row">
@@ -68,39 +114,55 @@ const Exp = ({ onNext, onHome, formData, updateFormData }) => {
                 onChange={(e) => handleChange(e, 'manageAtTime')}
                 required
               />
+              {errors.manageAtTime && <span className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.manageAtTime}</span>}
             </div>
 
             <div className="exp-row">
               <label>What size or scale of projects do you usually handle?</label>
-              <input 
-                type="text" 
-                placeholder="Below 25 Lacs" 
+              <select 
                 value={formData.projectScale}
                 onChange={(e) => handleChange(e, 'projectScale')}
                 required
-              />
+              >
+                <option value="" disabled>Select scale</option>
+                <option value="Below 25 Lacs">Below 25 Lacs</option>
+                <option value="25 - 50 Lacs">25 - 50 Lacs</option>
+                <option value="50 Lacs - 1 Cr">50 Lacs - 1 Cr</option>
+                <option value="1 Cr - 5 Cr">1 Cr - 5 Cr</option>
+                <option value="Above 5 Cr">Above 5 Cr</option>
+              </select>
+              {errors.projectScale && <span className="error-message" style={{ color: 'red', fontSize: '11px', marginTop: '5px', display: 'block' }}>{errors.projectScale}</span>}
             </div>
 
             <div className="exp-row">
               <label>What is the average duration of your projects?</label>
-              <input 
-                type="text" 
-                placeholder="6 Months" 
+              <select 
                 value={formData.averageDuration}
                 onChange={(e) => handleChange(e, 'averageDuration')}
                 required
-              />
+              >
+                <option value="" disabled>Select duration</option>
+                <option value="Less than 3 Months">Less than 3 Months</option>
+                <option value="3 - 6 Months">3 - 6 Months</option>
+                <option value="6 - 12 Months">6 - 12 Months</option>
+                <option value="12 - 24 Months">12 - 24 Months</option>
+                <option value="More than 2 Years">More than 2 Years</option>
+              </select>
+              {errors.averageDuration && <span className="error-message" style={{ color: 'red', fontSize: '11px', marginTop: '5px', display: 'block' }}>{errors.averageDuration}</span>}
             </div>
 
             <div className="exp-row">
               <label>Do you work with an in-house team or external labour?</label>
-              <input 
-                type="text" 
-                placeholder="Yes" 
+              <select 
                 value={formData.teamStructure}
                 onChange={(e) => handleChange(e, 'teamStructure')}
                 required
-              />
+              >
+                <option value="" disabled>Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+              {errors.teamStructure && <span className="error-message" style={{ color: 'red', fontSize: '11px', marginTop: '5px', display: 'block' }}>{errors.teamStructure}</span>}
             </div>
 
             <div className="form-footer">

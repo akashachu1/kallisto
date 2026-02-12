@@ -44,6 +44,8 @@ body {
   display: flex;
   list-style: none;
   gap: 30px;
+  flex: 1;
+  justify-content: center;
 }
 
 .nav-links a {
@@ -100,7 +102,7 @@ body {
 
 .watermark {
   position: absolute;
-  top: 55%;
+  top: 80%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: min(25vw, 30vh);
@@ -229,7 +231,7 @@ body {
 }
 
 .onboarding-ball {
-  width: 220px;
+  width: 253px;
   height: auto;
   z-index: 2;
   position: relative;
@@ -238,11 +240,11 @@ body {
 }
 
 .onboarding-black-ball {
-  width: 70px;
+  width: 80px;
   height: auto;
   position: absolute;
   top: 80%;
-    left: 40%;
+  left: 40%;
   z-index: 1;
   opacity: 1;
 }

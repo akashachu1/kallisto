@@ -3,13 +3,67 @@ import './Welcome.css';
 import logo from "../assets/LOGO.png";
 
 const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [errors, setErrors] = useState({
+    fullName: '',
+    address: '',
+    pincode: '',
+    mobile: ''
+  });
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleChange = (e) => {
     const { id, value } = e.target;
+
+    if (id === 'pincode') {
+      if (value !== '' && !/^\d*$/.test(value)) {
+        setErrors(prev => ({ ...prev, pincode: 'Pincode must contain only digits' }));
+        return;
+      }
+      if (value.length > 6) {
+        setErrors(prev => ({ ...prev, pincode: 'Pincode cannot exceed 6 digits' }));
+        return;
+      }
+      setErrors(prev => ({ ...prev, pincode: '' }));
+    }
+
+    if (id === 'mobile') {
+      if (value !== '' && !/^\+?\d*$/.test(value)) {
+        setErrors(prev => ({ ...prev, mobile: 'Invalid format. Use +91 or digits only' }));
+        return;
+      }
+      setErrors(prev => ({ ...prev, mobile: '' }));
+    }
+
+    // Clear empty field error on type
+    if (value.trim() !== '') {
+      setErrors(prev => ({ ...prev, [id]: '' }));
+    }
+
     updateFormData({ [id]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const newErrors = {};
+    if (!formData.fullName.trim()) newErrors.fullName = 'Full Name is required';
+    if (!formData.address.trim()) newErrors.address = 'Contact Address is required';
+    if (!formData.pincode.trim()) {
+      newErrors.pincode = 'Pincode is required';
+    } else if (formData.pincode.length !== 6) {
+      newErrors.pincode = 'Pincode must be exactly 6 digits';
+    }
+    if (!formData.mobile.trim()) newErrors.mobile = 'Mobile Number is required';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(prev => ({ ...prev, ...newErrors }));
+      return;
+    }
+
     console.log('Welcome Data saved:', formData);
     if (onNext) onNext();
   };
@@ -20,23 +74,24 @@ const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials
         <div className="logo">
           <img src={logo} alt="Kallisto" className="main-logo" />
         </div>
-        <ul className="nav-links">
-          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); }}>Home</a></li>
-          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onBeta(); }}>Beta</a></li>
-          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); }}>Materials</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div className="nav-buttons">
-          <button className="btn-text">Sign up</button>
-          <button className="btn-black">Register</button>
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </div>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); setIsMenuOpen(false); }}>Home</a></li>
+          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onBeta(); setIsMenuOpen(false); }}>Beta</a></li>
+          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); setIsMenuOpen(false); }}>Materials</a></li>
+          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
+          <li><a href="#career" onClick={() => setIsMenuOpen(false)}>Career</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
+        </ul>
       </nav>
 
       {/* FORM SECTION */}
       <section className="welcome-section">
-        <div className="watermark">Kallisto</div>
+        <div className="watermark">K▲llisto</div>
 
         <div className="welcome-content">
           <div className="welcome-header">
@@ -59,6 +114,7 @@ const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials
                 onChange={handleChange}
                 required
               />
+              {errors.fullName && <span className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.fullName}</span>}
             </div>
 
             <div className="form-group">
@@ -82,6 +138,7 @@ const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials
                 onChange={handleChange}
                 required
               ></textarea>
+              {errors.address && <span className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.address}</span>}
             </div>
 
             <div className="form-row">
@@ -95,6 +152,7 @@ const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials
                   onChange={handleChange}
                   required
                 />
+                {errors.pincode && <span className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.pincode}</span>}
               </div>
               <div className="form-group half">
                 <label htmlFor="mobile">Mobile Number</label>
@@ -106,6 +164,7 @@ const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials
                   onChange={handleChange}
                   required
                 />
+                {errors.mobile && <span className="error-message" style={{ color: 'red', fontSize: '12px', marginTop: '5px' }}>{errors.mobile}</span>}
               </div>
             </div>
 

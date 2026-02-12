@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Beta.css';
 import logo from "../assets/LOGO.png";
 import jack from "../assets/manh.png";    
@@ -10,6 +10,12 @@ import ball from "../assets/second.png";
 import shadow from "../assets/third.png";
 
 const Beta = ({ onHome, onJoinBeta, onBeta, onMaterials }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="kallisto-container">
       {/* HEADER / NAVBAR */}
@@ -17,31 +23,30 @@ const Beta = ({ onHome, onJoinBeta, onBeta, onMaterials }) => {
         <div className="logo">
           <img src={logo} alt="Kallisto" className="main-logo" />
         </div>
-        <ul className="nav-links">
-          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); }}>Home</a></li>
-          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onJoinBeta(); }}>Beta</a></li>
-          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); }}>Materials</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div className="nav-buttons">
-          <button className="btn-text">Sign up</button>
-          <button className="btn-black">Register</button>
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </div>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); setIsMenuOpen(false); }}>Home</a></li>
+          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onBeta(); setIsMenuOpen(false); }}>Beta</a></li>
+          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); setIsMenuOpen(false); }}>Materials</a></li>
+          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
+          <li><a href="#career" onClick={() => setIsMenuOpen(false)}>Career</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
+        </ul>
       </nav>
 
       {/* HERO SECTION */}
       <section className="beta-hero">
-        <div className="beta-watermark">Kallisto</div>
+        <div className="beta-watermark">K▲llisto</div>
         <div className="beta-hero-content">
           <div className="beta-hero-text">
             <span className="welcome-tag">Welcome to</span>
             <h1 className="beta-title">Beta Program</h1>
             <p className="beta-desc">
-              Beta participants get early access to a structured <strong>digital workflow</strong>, 
-              <strong> material coordination support</strong>, and <strong>verified project requirements</strong>, 
-              while helping refine the system through real projects.
+              Beta participants get early access to a structured <strong>digital workflow</strong>, <strong>material coordination support</strong>, and <strong>verified project requirements</strong>, while helping refine the system through real projects.
             </p>
             <p className="beta-note">This is not mass enrolment. It’s early partnership before scale.</p>
             <button className="beta-apply-btn" onClick={onJoinBeta}>Apply for Beta Access</button>

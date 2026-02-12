@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Material.css';
 import logo from "../assets/LOGO.png";
 import ball from "../assets/second.png";
@@ -6,6 +6,12 @@ import shadow from "../assets/third.png";
 import breaki from "../assets/mix.png";
 
 const Material = ({ onHome, onJoinBeta, onMaterials, onBeta }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="material-container">
       {/* HEADER / NAVBAR */}
@@ -13,30 +19,30 @@ const Material = ({ onHome, onJoinBeta, onMaterials, onBeta }) => {
         <div className="logo">
           <img src={logo} alt="Kallisto" className="main-logo" />
         </div>
-        <ul className="nav-links">
-          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); }}>Home</a></li>
-          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onJoinBeta(); }}>Beta</a></li>
-          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); }}>Materials</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div className="nav-buttons">
-          <button className="btn-text">Sign up</button>
-          <button className="btn-black">Register</button>
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </div>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); setIsMenuOpen(false); }}>Home</a></li>
+          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onBeta(); setIsMenuOpen(false); }}>Beta</a></li>
+          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); setIsMenuOpen(false); }}>Materials</a></li>
+          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
+          <li><a href="#career" onClick={() => setIsMenuOpen(false)}>Career</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
+        </ul>
       </nav>
 
       {/* HERO SECTION */}
       <section className="material-hero">
-        <div className="material-watermark">Kallisto</div>
+        <div className="material-watermark">K▲llisto</div>
         <div className="material-hero-content">
           <div className="material-hero-text">
             <span className="welcome-tag">Delivered & Coordinated via WhatsApp</span>
             <h1 className="material-title">Materials</h1>
             <p className="material-desc">
-              Browse verified Construction materials, get transparent pricing 
-              and order fulfilment support directly through WhatsApp.
+              Browse verified Construction materials, get transparent pricing and order<br></br> fulfilment support directly through WhatsApp.
             </p>
             <button className="order-now-btn" onClick={onJoinBeta}>Order Now</button>
             <p className="material-note">Material ordering is currently limited to onboarded service providers as part of the beta program.</p>

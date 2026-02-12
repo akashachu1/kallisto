@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Home from './components/Home'
 import Welcome from './components/Welcome'
 import Professional from './components/Professional'
@@ -30,23 +30,39 @@ function App() {
   const updateFormData = (newData) => {
     setFormData(prev => ({ ...prev, ...newData }));
   };
+  // Sync state with URL hash for browser back/forward support
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '') || 'home';
+      // Map hash back to internal page names if needed
+      if (['welcome', 'professional', 'exp', 'project', 'beta', 'home', 'materials'].includes(hash)) {
+        setPage(hash);
+      }
+    };
 
-  const goToWelcome = () => setPage('welcome');
-  const goToProfessional = () => setPage('professional');
-  const goToExp = () => setPage('exp');
-  const goToProject = () => setPage('project');
-  const goToBeta = () => setPage('beta');
-  const goToHome = () => setPage('home');
-  const goToMaterials = () => setPage('materials');
+    window.addEventListener('hashchange', handleHashChange);
+    // Initial check
+    handleHashChange();
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const goToWelcome = () => window.location.hash = 'welcome';
+  const goToProfessional = () => window.location.hash = 'professional';
+  const goToExp = () => window.location.hash = 'exp';
+  const goToProject = () => window.location.hash = 'project';
+  const goToBeta = () => window.location.hash = 'beta';
+  const goToHome = () => window.location.hash = 'home';
+  const goToMaterials = () => window.location.hash = 'materials';
 
   return (
     <div className="App">
-      {page === 'home' && <Home onBeta={goToBeta}  onMaterials={goToMaterials} />}
+      {page === 'home' && <Home onBeta={goToBeta} onMaterials={goToMaterials} onJoinBeta={goToWelcome} />}
       {page === 'welcome' && <Welcome onBeta={goToBeta} onMaterials={goToMaterials} onNext={goToProfessional} onHome={goToHome} formData={formData} updateFormData={updateFormData} />}
       {page === 'professional' && <Professional onBeta={goToBeta} onMaterials={goToMaterials} onNext={goToExp} onHome={goToHome} formData={formData} updateFormData={updateFormData} />}
       {page === 'exp' && <Exp onBeta={goToBeta} onMaterials={goToMaterials} onNext={goToProject} onHome={goToHome} formData={formData} updateFormData={updateFormData} />}
       {page === 'project' && <Project onBeta={goToBeta} onMaterials={goToMaterials} onHome={goToHome} formData={formData} />}
-      {page === 'beta' && <Beta onHome={goToHome} onBeta={goToBeta} onMaterials={goToMaterials} onJoinBeta={goToMaterials} />}
+      {page === 'beta' && <Beta onHome={goToHome} onBeta={goToBeta} onMaterials={goToMaterials} onJoinBeta={goToWelcome} />}
       {page === 'materials' && <Material onHome={goToHome} onBeta={goToBeta} onMaterials={goToMaterials} onJoinBeta={goToWelcome} />}
     </div>
   )

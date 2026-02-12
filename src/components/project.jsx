@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './project.css';
 import logo from "../assets/LOGO.png";
 import thankyou from "../assets/projlast.png";
 
 const Project = ({ onHome, formData, onBeta, onMaterials }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const userName = formData?.fullName || 'Partner';
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="kallisto-container">
@@ -13,18 +18,19 @@ const Project = ({ onHome, formData, onBeta, onMaterials }) => {
         <div className="logo">
           <img src={logo} alt="Kallisto" className="main-logo" />
         </div>
-        <ul className="nav-links">
-          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); }}>Home</a></li>
-          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onBeta(); }}>Beta</a></li>
-          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); }}>Materials</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div className="nav-buttons">
-          <button className="btn-text">Sign up</button>
-          <button className="btn-black">Register</button>
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </div>
+        <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+          <li><a href="#home" onClick={(e) => { e.preventDefault(); onHome(); setIsMenuOpen(false); }}>Home</a></li>
+          <li><a href="#beta" onClick={(e) => { e.preventDefault(); onBeta(); setIsMenuOpen(false); }}>Beta</a></li>
+          <li><a href="#materials" onClick={(e) => { e.preventDefault(); onMaterials(); setIsMenuOpen(false); }}>Materials</a></li>
+          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About Us</a></li>
+          <li><a href="#career" onClick={() => setIsMenuOpen(false)}>Career</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
+        </ul>
       </nav>
 
       {/* THANK YOU SECTION */}
