@@ -1,16 +1,35 @@
-# React + Vite
+# Kallisto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application built with Vite, featuring fast development experience and optimized production builds.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚡ **Lightning Fast** - Powered by Vite for instant server start and hot module replacement
+- ⚛️ **React 18** - Latest React features and optimizations
+- 📦 **Optimized Build** - Production-ready builds with automatic code splitting
+- 🔧 **ESLint Configured** - Code quality tools pre-configured
+- 🎨 **Modern JavaScript** - Babel support for cutting-edge JavaScript features
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework:** React 18
+- **Build Tool:** Vite
+- **Language:** JavaScript (ES6+)
+- **Linting:** ESLint
+- **Development Server:** Vite Dev Server with HMR
 
-## Expanding the ESLint configuration
+## 📋 Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Node.js (version 16 or higher)
+- npm or yarn or pnpm
+
+## 🔧 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/akashachu1/kallisto.git
+   cd kallisto
+   bash
+   npm install # or yarn install # or pnpm install
+   Start the development server: 
+   bash npm run dev # or yarn dev # or pnpm dev
