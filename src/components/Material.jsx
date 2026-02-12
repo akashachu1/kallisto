@@ -36,7 +36,7 @@ const Material = ({ onHome, onJoinBeta, onMaterials, onBeta }) => {
 
       {/* HERO SECTION */}
       <section className="material-hero">
-        <div className="material-watermark">K▲llisto</div>
+        <img src={logo} alt="" className="material-watermark" />
         <div className="material-hero-content">
           <div className="material-hero-text">
             <span className="welcome-tag">Delivered & Coordinated via WhatsApp</span>

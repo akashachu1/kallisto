@@ -102,20 +102,15 @@ body {
 
 .watermark {
   position: absolute;
-  top: 80%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: min(25vw, 30vh);
-  font-weight: 900;
-  color: rgba(0, 0, 0, 0.03);
-  z-index: -1;
+  width: 80%;
+  max-width: 1200px;
+  opacity: 0.05;
+  z-index: 0;
   pointer-events: none;
   user-select: none;
-  letter-spacing: -2px;
-  width: 100%;
-  text-align: center;
-  line-height: 1;
-  overflow: hidden;
 }
 
 .hero-content {

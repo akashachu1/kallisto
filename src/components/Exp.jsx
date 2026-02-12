@@ -81,7 +81,7 @@ const Exp = ({ onNext, onHome, formData, updateFormData }) => {
 
       {/* FORM SECTION */}
       <section className="exp-section">
-        <div className="watermark">K▲llisto</div>
+        <img src={logo} alt="" className="watermark" />
 
         <div className="exp-content">
           <div className="exp-header">

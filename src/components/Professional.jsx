@@ -69,7 +69,7 @@ const Professional = ({ onNext, onHome, formData, updateFormData, onBeta, onMate
 
       {/* FORM SECTION */}
       <section className="professional-section">
-        <div className="watermark">K▲llisto</div>
+        <img src={logo} alt="" className="watermark" />
 
         <div className="professional-content">
           <div className="professional-header">

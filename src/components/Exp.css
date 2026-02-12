@@ -77,15 +77,15 @@ body {
 
 .watermark {
     position: absolute;
-    top: 60%;
-    left: 45%;
+    top: 70%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 18vw;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.03);
-    z-index: -1;
+    width: 80%;
+    max-width: 1200px;
+    opacity: 0.05;
+    z-index: 0;
     pointer-events: none;
-    letter-spacing: -5px;
+    user-select: none;
 }
 
 .exp-content {

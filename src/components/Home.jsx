@@ -36,7 +36,7 @@ const Home = ({ onBeta, onMaterials, onJoinBeta }) => {
 
       {/* HERO SECTION */}
       <section className="hero-section">
-        <div className="watermark">K▲llisto</div>
+        <img src={logo} alt="" className="watermark" />
 
         <div className="hero-content">
           <div className="hero-text-area">

@@ -40,7 +40,7 @@ const Beta = ({ onHome, onJoinBeta, onBeta, onMaterials }) => {
 
       {/* HERO SECTION */}
       <section className="beta-hero">
-        <div className="beta-watermark">K▲llisto</div>
+        <img src={logo} alt="" className="beta-watermark" />
         <div className="beta-hero-content">
           <div className="beta-hero-text">
             <span className="welcome-tag">Welcome to</span>

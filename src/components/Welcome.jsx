@@ -91,7 +91,7 @@ const Welcome = ({ onNext, onHome, formData, updateFormData, onBeta, onMaterials
 
       {/* FORM SECTION */}
       <section className="welcome-section">
-        <div className="watermark">K▲llisto</div>
+        <img src={logo} alt="" className="watermark" />
 
         <div className="welcome-content">
           <div className="welcome-header">
